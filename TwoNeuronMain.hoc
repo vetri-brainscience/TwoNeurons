@@ -1,0 +1,46 @@
+create somaA
+somaA insert hh
+somaA {
+  diam = 22
+  L = 37
+  Ra = 100
+}
+
+create somaB
+  somaB insert hh
+somaB {
+  diam = 22
+  L = 37
+  Ra = 100
+}
+
+somaB {
+objref synapseAB
+synapseAB= new Exp2Syn(0.5)
+synapseAB.tau1=1  //ms rise time
+synapseAB.tau2=2  //ms decay time
+synapseAB.e=0    //mV reversal potential
+}
+
+objref connectionAB
+connectionAB= new NetCon(&somaA.v(0.5), synapseAB, thresh, delay, weight)
+
+access somaA
+objref spikesource
+spikesource = new NetStim(0.5)     //Location arbitrary
+spikesource.interval = 10          //ms (mean) time between spikes
+spikesource.number = 100           //(average) number of spikes
+spikesource.start = 0              //ms (mean) start time of the first spike
+spikesource.noise = 0              //range 0 to 1. Fractional randomnesss
+                                  //0 deterministic, 1 intervals have dcaying exp. distribution
+objref synapse                                  
+synapse = new Exp2Syn(0.5)
+sunapse.tau1 = 1   // ms rise time
+synapse.tau2 = 2   // ms decay time
+synapse.e = 0      //mV reversal potential
+
+objref connection
+thresh = 10
+delay = 0.1
+weight = 0.002
+connection = new NetCon(spikesource, synapse, thresh, delay, weight)
