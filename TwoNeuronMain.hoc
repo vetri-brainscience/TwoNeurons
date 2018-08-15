@@ -1,3 +1,4 @@
+load_file("stdrun.hoc")
 create somaA
 somaA insert hh
 somaA {
@@ -13,16 +14,18 @@ somaB {
   L = 37
   Ra = 100
 }
-
-somaB {
+access somaB
 objref synapseAB
-synapseAB= new Exp2Syn(0.5)
-synapseAB.tau1=1  //ms rise time
-synapseAB.tau2=2  //ms decay time
-synapseAB.e=0    //mV reversal potential
-}
+synapseAB = new Exp2Syn(0.5)
+synapseAB.tau1 = 1  //ms rise time
+synapseAB.tau2 = 2  //ms decay time
+synapseAB.e = 0    //mV reversal potential
+
 
 objref connectionAB
+thresh = 0
+delay = 0
+weight = 1
 connectionAB= new NetCon(&somaA.v(0.5), synapseAB, thresh, delay, weight)
 
 access somaA
@@ -32,10 +35,10 @@ spikesource.interval = 10          //ms (mean) time between spikes
 spikesource.number = 100           //(average) number of spikes
 spikesource.start = 0              //ms (mean) start time of the first spike
 spikesource.noise = 0              //range 0 to 1. Fractional randomnesss
-                                  //0 deterministic, 1 intervals have dcaying exp. distribution
+									//0 deterministic, 1 intervals have dcaying exp. distribution
 objref synapse                                  
 synapse = new Exp2Syn(0.5)
-sunapse.tau1 = 1   // ms rise time
+synapse.tau1 = 1   // ms rise time
 synapse.tau2 = 2   // ms decay time
 synapse.e = 0      //mV reversal potential
 
@@ -44,3 +47,19 @@ thresh = 10
 delay = 0.1
 weight = 0.002
 connection = new NetCon(spikesource, synapse, thresh, delay, weight)
+
+// recording membrane voltage
+objref vvec, tvec
+tvec = new Vector()
+tvec.record(&t)
+vvec = new Vector()
+vvec.record(&somaA.v(0.5))
+
+dttime  = .1   //ms
+numsteps = 1/dttime
+tstop = 500  //ms
+{load_file("TwoNeurons.ses")}
+{printf("888888888888888888888\n")}
+{run()}
+printf("999999999999999999999\n")
+load_file("TwoNeurons_Record.hoc")

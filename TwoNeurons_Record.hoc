@@ -1,0 +1,17 @@
+		/////// Recording variables//////////////
+printf("---------- from Record.hoc--------------")
+objref savdata
+savdata = new File()
+savdata.wopen("TwoNeurons_somaB_tandv.txt")
+savdata.printf("t somaB.v\n")
+savdata.printf("%d\n",tvec.size())
+for i=0,tvec.size()-1 {
+savdata.printf("%g %g\n",tvec.x(i),vvec.x(i)) }
+savdata.close()
+
+objref savinfo
+savinfo = new File()
+savinfo.wopen("TwoNeurons_Info.txt")
+savinfo.printf("Infomation on parameters*********\n")
+savinfo.close()
+printf("---------- done!--------------")
