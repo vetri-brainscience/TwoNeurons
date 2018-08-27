@@ -21,7 +21,7 @@ synapseAB.tau1 = 1  //ms rise time
 synapseAB.tau2 = 2  //ms decay time
 synapseAB.e = 0    //mV reversal potential
 
-
+access somaA
 objref connectionAB
 thresh = 0
 delay = 0
