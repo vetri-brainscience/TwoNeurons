@@ -17,7 +17,7 @@ somaB {
 access somaB
 objref synapseAB
 synapseAB = new Exp2Syn(0.5)
-synapseAB.tau1 = 1  //ms rise time
+synapseAB.tau1 = 10  //ms rise time
 synapseAB.tau2 = 2  //ms decay time
 synapseAB.e = 0    //mV reversal potential
 
@@ -47,9 +47,10 @@ thresh = 10
 delay = 0.1
 weight = 0.002
 connection = new NetCon(spikesource, synapse, thresh, delay, weight)
-
+printf("SomaA. synapse.tau1 = %g\n", synapse.tau1)
+printf("SomaB. synapseAB.tau1 = %g\n", synapseAB.tau1)
 // recording membrane voltage
-objref vvecA, vvecB, tvec
+objref vvecA, vvecB, tvec, condA, condB
 tvec = new Vector()
 tvec.record(&t)
 vvecA = new Vector()
@@ -57,11 +58,19 @@ vvecA.record(&somaA.v(0.5))
 vvecB = new Vector()
 vvecB.record(&somaB.v(0.5))
 
+condA = new Vector()
+condB = new Vector()
+condA.record(&synapse.g)
+condB.record(&synapseAB.g)
+
 dttime  = .1   //ms
 numsteps = 1/dttime
 tstop = 500  //ms
 {load_file("TwoNeurons.ses")}
 {printf("888888888888888888888\n")}
 {run()}
-printf("999999999999999999999\n")
+{printf("999999999999999999999\n")}
 load_file("TwoNeurons_Record.hoc")
+{printf("\n")}
+{printf("condA.size() = %d\n", condA.size())}
+{printf("condB.size() = %d\n", condB.size())}
