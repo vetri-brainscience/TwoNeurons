@@ -6,7 +6,7 @@ savdata.wopen("TwoNeurons_somaB_tandv.txt")
 savdata.printf("t somaB.v\n")
 savdata.printf("%d\n",tvec.size())
 for i=0,tvec.size()-1 {
-savdata.printf("%g %g\n",tvec.x(i),vvec.x(i)) }
+savdata.printf("%g\t%g\t%g\n",tvec.x(i), vvecA.x(i), vvecB.x(i)) }
 savdata.close()
 
 objref savinfo

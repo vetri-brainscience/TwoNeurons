@@ -49,11 +49,13 @@ weight = 0.002
 connection = new NetCon(spikesource, synapse, thresh, delay, weight)
 
 // recording membrane voltage
-objref vvec, tvec
+objref vvecA, vvecB, tvec
 tvec = new Vector()
 tvec.record(&t)
-vvec = new Vector()
-vvec.record(&somaA.v(0.5))
+vvecA = new Vector()
+vvecA.record(&somaA.v(0.5))
+vvecB = new Vector()
+vvecB.record(&somaB.v(0.5))
 
 dttime  = .1   //ms
 numsteps = 1/dttime
