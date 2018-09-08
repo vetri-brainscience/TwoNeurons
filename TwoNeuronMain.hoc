@@ -17,21 +17,21 @@ somaB {
 access somaB
 objref synapseAB
 synapseAB = new Exp2Syn(0.5)
-synapseAB.tau1 = 10  //ms rise time
-synapseAB.tau2 = 2  //ms decay time
-synapseAB.e = 0    //mV reversal potential
+synapseAB.tau1 = 1  //ms rise time
+synapseAB.tau2 = 5  //ms decay time
+synapseAB.e = 0  //mV reversal potential
 
 access somaA
 objref connectionAB
-thresh = 0
-delay = 0
+thresh = -40
+delay = 1
 weight = 1
 connectionAB= new NetCon(&somaA.v(0.5), synapseAB, thresh, delay, weight)
 
 access somaA
 objref spikesource
 spikesource = new NetStim(0.5)     //Location arbitrary
-spikesource.interval = 10          //ms (mean) time between spikes
+spikesource.interval = 6          //ms (mean) time between spikes
 spikesource.number = 100           //(average) number of spikes
 spikesource.start = 0              //ms (mean) start time of the first spike
 spikesource.noise = 0              //range 0 to 1. Fractional randomnesss
@@ -45,7 +45,7 @@ synapse.e = 0      //mV reversal potential
 objref connection
 thresh = 10
 delay = 0.1
-weight = 0.002
+weight = 1.
 connection = new NetCon(spikesource, synapse, thresh, delay, weight)
 printf("SomaA. synapse.tau1 = %g\n", synapse.tau1)
 printf("SomaB. synapseAB.tau1 = %g\n", synapseAB.tau1)
