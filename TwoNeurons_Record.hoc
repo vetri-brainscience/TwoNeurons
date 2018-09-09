@@ -6,7 +6,7 @@ savdata.wopen("TwoNeurons_membPot_at_AandB.txt")
 savdata.printf("t\tsomaA.v\tsomaB.v\n")
 savdata.printf("%d\n",tvec.size())
 for i=0,tvec.size()-1 {
-savdata.printf("%g\t%g\t%g\t%g\t%g\n",tvec.x(i), vvecA.x(i), vvecB.x(i), condA.x(i), condB.x(i)) }
+savdata.printf("%g\t%g\t%g\t%g\t%g\t%g\t%g\n",tvec.x(i), vvecA.x(i), vvecB.x(i), condA.x(i), condAB.x(i), iA.x(i), iAB.x(i)) }
 savdata.close()
 objref savinfo
 savinfo = new File()
