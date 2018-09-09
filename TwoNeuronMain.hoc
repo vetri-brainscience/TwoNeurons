@@ -31,7 +31,7 @@ connectionAB = new NetCon(&somaA.v(0.5), synapseAB, thresh, delay, weight)
 access somaA
 objref spikesource
 spikesource = new NetStim(0.5)     //Location arbitrary
-spikesource.interval = 20          //ms (mean) time between spikes
+spikesource.interval = 60          //ms (mean) time between spikes
 spikesource.number = 100           //(average) number of spikes
 spikesource.start = 0              //ms (mean) start time of the first spike
 spikesource.noise = 0              //range 0 to 1. Fractional randomnesss
