@@ -76,4 +76,4 @@ tstop = 500  //ms
 load_file("TwoNeurons_Record.hoc")
 {printf("\n")}
 {printf("condA.size() = %d\n", condA.size())}
-{printf("condB.size() = %d\n", condB.size())}
+{printf("condAB.size() = %d\n", condAB.size())}
